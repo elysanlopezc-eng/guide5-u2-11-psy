@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Montano - Research Tools and Instruments</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        montano: {
+                            blue: '#1269A8',
+                            yellow: '#F7D615',
+                            teal: '#54887D',
+                            lightBlue: '#88B5C7',
+                            olive: '#A6B046',
+                            softWhite: '#F2F5E9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Nunito', 'Segoe UI', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #E2E8F0;
+            font-family: 'Nunito', 'Segoe UI', sans-serif;
+        }
+
+        /* Digital Whiteboard Frame Styling */
+        .whiteboard-frame {
+            background-color: #F2F5E9;
+            border: 12px solid #334155;
+            border-radius: 24px;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.3), 0 0 15px rgba(18, 105, 168, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn {
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn.active {
+            background-color: #1269A8;
+            color: #ffffff;
+            border-bottom: 4px solid #F7D615;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F2F5E9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #88B5C7;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1269A8;
+        }
+
+        .pulse-ring {
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 214, 21, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 12px rgba(247, 214, 21, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(247, 214, 21, 0); }
+        }
+    </style>
+</head>
+<body class="p-2 sm:p-4 md:p-6 min-h-screen">
+
+    <!-- Main Container / Digital Whiteboard Frame -->
+    <div id="whiteboard" class="whiteboard-frame max-w-7xl mx-auto p-4 sm:p-6 md:p-8 flex flex-col min-h-[90vh]">
+        
+        <!-- Header Section -->
+        <header class="flex flex-col md:flex-row justify-between items-center border-b-4 border-montano-blue pb-4 mb-6 gap-4">
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-start">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEop0yf6lZ7Jk9MILZxF1rBj4Oqs5esyhIQ&s" 
+                     alt="Colegio Montano Logo" 
+                     class="h-14 sm:h-16 w-auto object-contain rounded-lg shadow-sm border border-gray-200 bg-white p-1"
+                     onerror="this.onerror=null; this.src='https://placehold.co/150x60/1269A8/ffffff?text=Montano';">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-montano-teal">High School - 4to Bachillerato (B2 Level) • Guide 5</span>
+                    <h1 class="text-xl sm:text-2xl font-extrabold text-montano-blue leading-tight">Research Tools and Instruments</h1>
+                    <p class="text-xs text-gray-600 font-semibold">Questionnaires, Observation Checklists, Rating Scales, Psychological Tests & Instrument Design</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                <button onclick="toggleFullscreen()" title="Toggle Digital Whiteboard Fullscreen"
+                        class="flex items-center gap-2 bg-montano-blue hover:bg-montano-teal text-white px-4 py-2 rounded-xl text-sm font-bold shadow-md transition-all active:scale-95">
+                    <i class="fa-solid fa-expand text-montano-yellow"></i>
+                    <span class="hidden sm:inline">Fullscreen Whiteboard</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Interactive Horizontal Navigation Tabs -->
+        <nav class="flex overflow-x-auto gap-2 pb-2 mb-6 border-b border-gray-300 scrollbar-thin">
+            <button onclick="switchTab('tab1')" id="btn-tab1" class="tab-btn active whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-clipboard-list text-montano-yellow"></i> 1. Theoretical Foundations & Agenda
+            </button>
+            <button onclick="switchTab('tab2')" id="btn-tab2" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-lightbulb text-montano-yellow"></i> 2. Solved Examples (15)
+            </button>
+            <button onclick="switchTab('tab3')" id="btn-tab3" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-sliders text-montano-yellow"></i> 3. Voice Simulator & Dashboard
+            </button>
+            <button onclick="switchTab('tab4')" id="btn-tab4" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-pen-ruler text-montano-yellow"></i> 4. Instrument Workshop & Project 2
+            </button>
+            <button onclick="switchTab('tab5')" id="btn-tab5" class="tab-btn whitespace-nowrap px-4 py-3 rounded-t-xl font-bold text-sm sm:text-base flex items-center gap-2 text-gray-700 hover:bg-montano-lightBlue hover:text-white">
+                <i class="fa-solid fa-list-check text-montano-yellow"></i> 5. Formative Evaluation (15)
+            </button>
+        </nav>
+
+        <!-- TAB CONTENT CONTAINER -->
+        <main class="flex-grow">
+
+            <!-- TAB 1: Theoretical Foundations & Agenda -->
+            <section id="tab1" class="tab-content block space-y-6">
+                <!-- 1-Hour Instructional Blueprint -->
+                <div class="bg-white border-l-8 border-montano-yellow p-5 rounded-2xl shadow-sm">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="bg-montano-yellow text-montano-blue text-xs font-black px-3 py-1 rounded-full uppercase">1-Hour Class Structure</span>
+                        <h2 class="text-lg font-bold text-montano-blue">Instructional Agenda: Master Research Instruments & Project 2 Due</h2>
+                    </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 mt-3">
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-lightBlue text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">5 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Retrieval Practice</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-teal text-center">
+                            <span class="text-xs font-extrabold text-montano-teal block">15 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Introduce Research Instruments</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-olive text-center">
+                            <span class="text-xs font-extrabold text-montano-olive block">15 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Evaluate Questions & Bias</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-blue text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">15 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Draft Instrument for Research Q</span>
+                        </div>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-montano-yellow text-center">
+                            <span class="text-xs font-extrabold text-montano-blue block">10 Min</span>
+                            <span class="text-[11px] text-gray-700 font-semibold">Submit / Peer-Review Project 2</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-Min Retrieval Practice Review -->
+                <div class="bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-sm">
+                    <h3 class="text-lg font-extrabold text-montano-blue mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-left text-montano-yellow"></i> 5-Minute Retrieval Practice: Method & Tool Connection
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-blue block mb-1">1. Research Method vs. Instrument</span>
+                            <p class="text-xs text-gray-700">What is the distinction between a research <em>method</em> (e.g., survey design) and a research <em>instrument</em> (e.g., a 10-item Likert questionnaire)?</p>
+                        </div>
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-teal block mb-1">2. Operational Definitions</span>
+                            <p class="text-xs text-gray-700">How does a rating scale operationalize an abstract psychological construct like "exam anxiety"?</p>
+                        </div>
+                        <div class="p-3 bg-montano-softWhite rounded-xl border border-gray-200">
+                            <span class="text-xs font-bold text-montano-olive block mb-1">3. Validity & Reliability</span>
+                            <p class="text-xs text-gray-700">Why must a standardized psychological test undergo pilot testing before full administration?</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research Instruments Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Questionnaires & Rating Scales -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-blue mb-3">
+                                <i class="fa-solid fa-file-pen text-2xl"></i>
+                                <h3 class="text-lg font-bold">Questionnaires & Rating Scales</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Questionnaires:</strong> Structured series of written items (open-ended or closed-ended).<br><br>
+                                <strong>Likert Scales:</strong> Rating continuum (e.g., 1 = Strongly Disagree to 5 = Strongly Agree) designed to quantify subjective attitudes or feelings.
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-lightBlue">
+                            <span class="text-xs font-bold text-montano-teal block mb-1">Quantitative Precision</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-blue h-3 rounded-full w-[90%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-blue">High statistical comparability</span>
+                        </div>
+                    </div>
+
+                    <!-- Observation Checklists & Interview Guides -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-teal shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-teal mb-3">
+                                <i class="fa-solid fa-list-check text-2xl"></i>
+                                <h3 class="text-lg font-bold">Checklists & Interview Guides</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Observation Checklists:</strong> Pre-categorized grids used to record presence, frequency, or duration of specific behaviors.<br><br>
+                                <strong>Interview Guides:</strong> Prompt sheets outlining structured, semi-structured, or unstructured questions.
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-olive">
+                            <span class="text-xs font-bold text-montano-olive block mb-1">Qualitative Depth & Reliability</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-teal h-3 rounded-full w-[85%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-teal">High behavioral validity</span>
+                        </div>
+                    </div>
+
+                    <!-- Psychological Tests & Question Bias -->
+                    <div class="bg-white p-6 rounded-2xl border-2 border-montano-olive shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 text-montano-olive mb-3">
+                                <i class="fa-solid fa-brain text-2xl"></i>
+                                <h3 class="text-lg font-bold">Psych Tests & Avoiding Bias</h3>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <strong>Psychological Tests:</strong> Standardized, validated instruments measuring intelligence, personality traits, or cognitive skills.<br><br>
+                                <strong class="text-red-600">Question Flaws to Avoid:</strong> Leading questions, double-barreled items, and jargon.
+                            </p>
+                        </div>
+                        <div class="bg-montano-softWhite p-3 rounded-xl border border-montano-yellow">
+                            <span class="text-xs font-bold text-montano-blue block mb-1">Item Rigor & Neutrality</span>
+                            <div class="w-full bg-gray-200 rounded-full h-3">
+                                <div class="bg-montano-yellow h-3 rounded-full w-[94%]"></div>
+                            </div>
+                            <span class="text-xs text-right block mt-1 font-semibold text-montano-blue">Eliminates wording bias</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Common Question Bias Pitfalls Table -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-300 shadow-md">
+                    <h3 class="text-xl font-extrabold text-montano-blue mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-bug text-montano-yellow"></i> Evaluating Question Wording: Common Bias Pitfalls
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead>
+                                <tr class="bg-montano-blue text-white font-bold">
+                                    <th class="p-3 rounded-tl-lg">Flaw Type</th>
+                                    <th class="p-3">Flawed Example Question</th>
+                                    <th class="p-3">Why It Threatens Validity</th>
+                                    <th class="p-3 rounded-tr-lg">Improved Neutral Item</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-montano-softWhite">
+                                <tr>
+                                    <td class="p-3 font-bold text-red-600">Leading Question</td>
+                                    <td class="p-3">"Don't you agree that school start times are unreasonably early?"</td>
+                                    <td class="p-3">Nudges respondent toward a specific answer.</td>
+                                    <td class="p-3 font-semibold text-green-700">"How satisfied are you with the current school start time?"</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-red-600">Double-Barreled Question</td>
+                                    <td class="p-3">"Do you feel anxious during exams and sad when getting grades?"</td>
+                                    <td class="p-3">Asks two distinct questions at once; impossible to answer cleanly.</td>
+                                    <td class="p-3 font-semibold text-green-700">Split into 2 separate items: 1) Exam anxiety, 2) Reaction to grades.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-red-600">Jargon / Ambiguous Terms</td>
+                                    <td class="p-3">"How frequently do you experience acute cognitive overload?"</td>
+                                    <td class="p-3">Uses psychological jargon that participants may misunderstand.</td>
+                                    <td class="p-3 font-semibold text-green-700">"How often do you feel overwhelmed by your schoolwork?"</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold text-red-600">Social Desirability Bias</td>
+                                    <td class="p-3">"Do you always pay full attention during every online lecture?"</td>
+                                    <td class="p-3">Pressures respondent to lie to look good.</td>
+                                    <td class="p-3 font-semibold text-green-700">"On average, how many minutes per lecture do you find yourself distracted?"</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Solved Examples (15 Examples) -->
+            <section id="tab2" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-gray-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Solved Examples: Research Tools & Instruments</h2>
+                        <p class="text-xs text-gray-600">Examine real-world research instruments across 3 levels. Click the speaker icon to hear the analysis.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterExamples('all')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white">All (15)</button>
+                        <button onclick="filterExamples('basic')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 1 Basic</button>
+                        <button onclick="filterExamples('intermediate')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 2 Interm.</button>
+                        <button onclick="filterExamples('advanced')" class="ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 3 Adv.</button>
+                    </div>
+                </div>
+
+                <div id="examples-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Populated dynamically via JavaScript -->
+                </div>
+            </section>
+
+            <!-- TAB 3: Interactive Voice Simulator & Live Performance Dashboard -->
+            <section id="tab3" class="tab-content hidden space-y-6">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Voice Simulator Controls (7 cols) -->
+                    <div class="lg:col-span-7 bg-white p-6 rounded-2xl border-2 border-montano-blue shadow-md flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between border-b pb-3 mb-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-montano-blue text-white flex items-center justify-center font-bold">
+                                        <i class="fa-solid fa-pen-ruler"></i>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-montano-blue">Dr. Montano - Research Instrument Evaluator</h3>
+                                        <span class="text-xs text-montano-teal font-semibold">Interactive Oral Instrument Defense</span>
+                                    </div>
+                                </div>
+                                <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="w-2 h-2 rounded-full bg-green-500 animate-ping"></span> Speech Engine Ready
+                                </span>
+                            </div>
+
+                            <!-- Mentor Dialogue Box -->
+                            <div class="bg-montano-softWhite p-4 rounded-xl border border-montano-lightBlue mb-4">
+                                <p id="mentor-speech" class="text-sm text-gray-800 font-semibold leading-relaxed">
+                                    "Welcome! Scenario: A researcher wants to measure student burnout. Defense task: Choose an appropriate instrument (e.g., Likert rating scale, observation checklist, or questionnaire), write 2 neutral sample items, and explain how you avoided leading wording and double-barreled questions."
+                                </p>
+                                <button onclick="speakText(document.getElementById('mentor-speech').innerText)" class="mt-2 text-xs font-bold text-montano-blue hover:text-montano-teal flex items-center gap-1">
+                                    <i class="fa-solid fa-volume-high"></i> Replay Prompt Audio
+                                </button>
+                            </div>
+
+                            <!-- Voice Input Controls -->
+                            <div class="space-y-3">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider">Your Spoken / Written Instrument Defense</label>
+                                <div class="flex gap-2">
+                                    <button id="mic-btn" onclick="toggleSpeechRecognition()" class="flex-1 bg-montano-blue hover:bg-montano-teal text-white py-3 px-4 rounded-xl font-bold text-sm shadow flex items-center justify-center gap-2 transition-all">
+                                        <i class="fa-solid fa-microphone text-montano-yellow text-lg"></i>
+                                        <span id="mic-btn-text">Start Speaking Defense</span>
+                                    </button>
+                                </div>
+                                
+                                <p class="text-xs text-gray-500 italic text-center">Or type your instrument defense below if mic access is unavailable:</p>
+
+                                <textarea id="user-input-text" rows="3" placeholder="Example: I will use a 5-point Likert scale ranging from 'Never' to 'Always'. Item 1: 'How often do you feel exhausted by your homework?' I avoided double-barreled items by keeping tiredness and anxiety in separate questions..." 
+                                          class="w-full p-3 border-2 border-gray-200 rounded-xl text-sm focus:border-montano-blue focus:outline-none transition"></textarea>
+                                
+                                <button onclick="evaluateUserResponse()" class="w-full bg-montano-yellow hover:bg-amber-400 text-montano-blue font-extrabold py-3 px-4 rounded-xl text-sm shadow transition">
+                                    Analyze Instrument Defense
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Speech Status Notification -->
+                        <div id="speech-status" class="mt-4 text-xs font-bold text-gray-500 text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> Ready for voice/text entry. Specify instrument type, Likert scale, and bias control.
+                        </div>
+                    </div>
+
+                    <!-- Live Performance Dashboard (5 cols) -->
+                    <div class="lg:col-span-5 bg-white p-6 rounded-2xl border-2 border-montano-teal shadow-md flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-lg font-extrabold text-montano-blue border-b pb-2 mb-4 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-montano-yellow"></i> Live Performance Dashboard
+                            </h3>
+
+                            <!-- Score Meters -->
+                            <div class="space-y-4">
+                                <!-- Speech Clarity -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Pronunciation & Speech Clarity Score</span>
+                                        <span id="score-clarity-val" class="text-montano-blue">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-clarity-bar" class="bg-montano-blue h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Method Accuracy -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Topic / Instrument Accuracy Score</span>
+                                        <span id="score-accuracy-val" class="text-montano-teal">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-accuracy-bar" class="bg-montano-teal h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Academic Etiquette -->
+                                <div>
+                                    <div class="flex justify-between text-xs font-bold mb-1">
+                                        <span class="text-gray-700">Politeness & Academic Etiquette Score</span>
+                                        <span id="score-etiquette-val" class="text-montano-olive">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-3">
+                                        <div id="score-etiquette-bar" class="bg-montano-olive h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Key Scientific Terms Detected -->
+                            <div class="mt-6">
+                                <label class="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Detected Instrument Keywords</label>
+                                <div id="detected-terms-container" class="flex flex-wrap gap-1.5 min-h-[40px] p-2 bg-montano-softWhite rounded-xl border border-gray-200">
+                                    <span class="text-xs text-gray-400 italic">No instrument terms detected yet. Speak or type your defense.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Pedagogical Feedback Container -->
+                        <div class="mt-6 bg-montano-softWhite p-4 rounded-xl border border-montano-lightBlue">
+                            <h4 class="text-xs font-extrabold text-montano-blue uppercase tracking-wider mb-1 flex items-center gap-1">
+                                <i class="fa-solid fa-graduation-cap"></i> AI Pedagogical Feedback
+                            </h4>
+                            <p id="ai-feedback-text" class="text-xs text-gray-700 leading-relaxed">
+                                Awaiting response. Complete the scenario prompt to receive instant automated feedback on your research instrument design.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Instrument Workshop & Project 2 Submission -->
+            <section id="tab4" class="tab-content hidden space-y-6">
+                <!-- Instrument Evaluation Workshop -->
+                <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-montano-teal text-white text-xs font-bold px-3 py-1 rounded-full uppercase">15-Min Guided Workshop</span>
+                        <h2 class="text-xl font-extrabold text-montano-blue">Question Bias Repair & Instrument Selection</h2>
+                    </div>
+                    <p class="text-sm text-gray-600 mb-6">Rewrite flawed survey questions and draft an instrument aligned with a research aim.</p>
+
+                    <div class="space-y-6">
+                        <!-- Practice Question 1 -->
+                        <div class="p-4 bg-montano-softWhite rounded-xl border-l-4 border-montano-blue">
+                            <span class="text-xs font-bold text-montano-blue uppercase">Item Repair #1: Leading & Double-Barreled Flaw</span>
+                            <h3 class="font-bold text-sm text-gray-800 mt-1">"Why do you think social media causes depression and hurts teenagers' sleep?"</h3>
+                            <p class="text-xs text-gray-600 mb-3">Identify the two flaws in this item and rewrite it into two neutral, well-structured research questions.</p>
+                            <textarea rows="2" class="w-full p-3 border rounded-xl text-sm focus:border-montano-blue focus:outline-none" placeholder="Flaws: Assumes causation (leading) and asks about depression and sleep together (double-barreled). Repair: Item A: 'On average, how many hours do you sleep per night?' Item B: 'Rate your agreement: Social media use affects my mood.'..."></textarea>
+                        </div>
+
+                        <!-- Practice Question 2 -->
+                        <div class="p-4 bg-montano-softWhite rounded-xl border-l-4 border-montano-teal">
+                            <span class="text-xs font-bold text-montano-teal uppercase">Item Repair #2: Ambiguous Scaling</span>
+                            <h3 class="font-bold text-sm text-gray-800 mt-1">"Do you study a lot?" (Options: Yes / No / Sometimes)</h3>
+                            <p class="text-xs text-gray-600 mb-3">Why is 'a lot' ambiguous? Redesign this into a 5-point frequency scale or specific hourly metric.</p>
+                            <textarea rows="2" class="w-full p-3 border rounded-xl text-sm focus:border-montano-teal focus:outline-none" placeholder="Repair: 'How many hours per week do you spend studying outside of class?' Options: 0-2 hours, 3-5 hours, 6-8 hours, 9-11 hours, 12+ hours..."></textarea>
+                        </div>
+
+                        <!-- Project 2 Submission & Peer-Review Workshop -->
+                        <div class="p-5 bg-white rounded-xl border-2 border-montano-yellow shadow-md">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-montano-yellow text-montano-blue text-xs font-extrabold px-3 py-1 rounded-full uppercase">10-Min Project 2 Due</span>
+                                <h3 class="font-bold text-sm text-montano-blue">Project 2 Final Checkpoint: Instrument Draft Submission & Peer Review</h3>
+                            </div>
+                            <p class="text-xs text-gray-600 mb-3">Submit your finalized research instrument details below for instructor and peer evaluation.</p>
+                            
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-blue mb-1">Project Research Question:</label>
+                                    <input id="proj-q" type="text" placeholder="e.g., How does screen time prior to sleep impact self-reported fatigue in high schoolers?" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-teal mb-1">Selected Research Instrument Type:</label>
+                                    <select id="proj-type" class="w-full p-2 border rounded-lg text-xs font-semibold text-gray-700">
+                                        <option value="">Select Instrument Type...</option>
+                                        <option value="likert">5-Point Likert Rating Scale</option>
+                                        <option value="checklist">Structured Observation Checklist</option>
+                                        <option value="interview">Semi-Structured Interview Guide</option>
+                                        <option value="questionnaire">Mixed Open/Closed Questionnaire</option>
+                                        <option value="psych-test">Standardized Psychological Test</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-olive mb-1">Sample Instrument Item #1 (Neutral):</label>
+                                    <input id="proj-item1" type="text" placeholder="e.g., 'I feel alert during my first-period morning class.' (1 = Strongly Disagree to 5 = Strongly Agree)" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-montano-blue mb-1">Sample Instrument Item #2 (Neutral):</label>
+                                    <input id="proj-item2" type="text" placeholder="e.g., 'How many days per week do you use a smartphone within 30 minutes of bedtime?'" class="w-full p-2 border rounded-lg text-xs">
+                                </div>
+                            </div>
+
+                            <button onclick="saveProjectCheckpoint()" class="bg-montano-blue hover:bg-montano-teal text-white font-bold text-xs px-4 py-2 rounded-lg shadow transition">
+                                Submit Project 2 Instrument Draft
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Formative Evaluation (15 Practice Problems) -->
+            <section id="tab5" class="tab-content hidden space-y-6">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white p-4 rounded-2xl border border-gray-200 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-montano-blue">15 Evaluative Practice Problems</h2>
+                        <p class="text-xs text-gray-600">Match instruments, identify question flaws, and evaluate instrument validity. Toggle step-by-step solutions.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="filterProblems('all')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white">All (15)</button>
+                        <button onclick="filterProblems('basic')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 1 Basic</button>
+                        <button onclick="filterProblems('intermediate')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 2 Interm.</button>
+                        <button onclick="filterProblems('advanced')" class="prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700">Level 3 Adv.</button>
+                    </div>
+                </div>
+
+                <!-- Formative Exercises List -->
+                <div id="problems-container" class="space-y-4">
+                    <!-- Populated dynamically via JavaScript -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="mt-8 pt-4 border-t border-gray-300 text-center text-xs text-gray-600 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>
+                <strong>Colegio Montano</strong> &copy; 2026 - Senior Instructional Design & Interactive Educational Web
+            </div>
+            <div class="text-montano-teal font-semibold">
+                High School Department | Psychology B2 Curriculum (Guide 5)
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & INTERACTION ENGINE -->
+    <script>
+        // DATA STRUCTURES: 15 Solved Examples (Guide 5 Focus)
+        const solvedExamples = [
+            // Level 1: Basic (5)
+            { 
+                id: 1, level: 'basic', 
+                text: 'Using a 5-point Likert scale (Strongly Disagree to Strongly Agree) to measure high school students\' motivation levels in math.', 
+                type: 'Rating Scale (Likert)', 
+                explanation: 'A Likert scale quantifies subjective attitudes along a structured, standardized continuum.', 
+                tags: ['Likert Scale', 'Quantitative', 'Basic'] 
+            },
+            { 
+                id: 2, level: 'basic', 
+                text: 'A researcher uses a paper questionnaire with 10 multiple-choice questions to quickly collect data from 200 participants.', 
+                type: 'Closed-Ended Questionnaire', 
+                explanation: 'Closed-ended questionnaires allow efficient data collection and easy numerical analysis.', 
+                tags: ['Questionnaire', 'Closed-Ended', 'Basic'] 
+            },
+            { 
+                id: 3, level: 'basic', 
+                text: 'Using a pre-printed behavioral checklist to tick off instances of fidgeting during a 15-minute exam.', 
+                type: 'Observation Checklist', 
+                explanation: 'Checklists operationalize specific target behaviors into clear observable tally marks.', 
+                tags: ['Checklist', 'Observation', 'Basic'] 
+            },
+            { 
+                id: 4, level: 'basic', 
+                text: 'Asking open-ended questions like "How do you feel when presenting in front of your class?" in an interview.', 
+                type: 'Interview Guide (Open-Ended)', 
+                explanation: 'Open-ended prompts allow participants to express personal feelings in their own words.', 
+                tags: ['Interview', 'Qualitative', 'Basic'] 
+            },
+            { 
+                id: 5, level: 'basic', 
+                text: 'Identifying that the question "Don\'t you agree that homework is stressful?" contains leading wording bias.', 
+                type: 'Leading Question Identification', 
+                explanation: 'The phrasing "Don\'t you agree..." pushes the respondent toward agreeing rather than giving a neutral answer.', 
+                tags: ['Bias', 'Question Flaw', 'Basic'] 
+            },
+
+            // Level 2: Intermediate (5)
+            { 
+                id: 6, level: 'intermediate', 
+                text: 'Repairing a double-barreled item: "Do you feel overwhelmed by schoolwork and tired in the morning?"', 
+                type: 'Double-Barreled Repair', 
+                explanation: 'Splitting the item into two separate questions guarantees clear operational measurement for each variable.', 
+                tags: ['Double-Barreled', 'Instrument Repair'] 
+            },
+            { 
+                id: 7, level: 'intermediate', 
+                text: 'Designing a semi-structured interview guide where the interviewer asks core questions but can probe follow-up ideas.', 
+                type: 'Semi-Structured Interview Guide', 
+                explanation: 'Balances standardization across participants with flexibility to explore unexpected qualitative insights.', 
+                tags: ['Semi-Structured', 'Interview Guide'] 
+            },
+            { 
+                id: 8, level: 'intermediate', 
+                text: 'Administering the Beck Depression Inventory (BDI), a standardized psychological test with established clinical norms.', 
+                type: 'Standardized Psychological Test', 
+                explanation: 'Psychological tests undergo rigorous psychometric evaluation to ensure high test-retest reliability and construct validity.', 
+                tags: ['Psychological Test', 'Standardized'] 
+            },
+            { 
+                id: 9, level: 'intermediate', 
+                text: 'Controlling for Social Desirability Bias by assuring anonymous responses on sensitive questions about academic dishonesty.', 
+                type: 'Social Desirability Control', 
+                explanation: 'Anonymity reduces participant anxiety about being judged, resulting in more truthful self-report data.', 
+                tags: ['Social Desirability', 'Anonymity'] 
+            },
+            { 
+                id: 10, level: 'intermediate', 
+                text: 'Matching a research aim ("Evaluate non-verbal stress cues during job interviews") to a video-recorded observation checklist.', 
+                type: 'Matching Aim to Instrument', 
+                explanation: 'Observational checklists excel at capturing real-time bodily gestures better than self-report questionnaires.', 
+                tags: ['Instrument Match', 'Observation'] 
+            },
+
+            // Level 3: Advanced (5)
+            { 
+                id: 11, level: 'advanced', 
+                text: 'Conducting Pilot Testing (Pre-testing) on a 20-item survey with 5 students to detect ambiguous phrasing before launching.', 
+                type: 'Pilot Testing & Instrument Validation', 
+                explanation: 'Pilot testing identifies unclear wording, floor/ceiling effects, and administrative timing errors early.', 
+                tags: ['Pilot Test', 'Validation', 'Advanced'] 
+            },
+            { 
+                id: 12, level: 'advanced', 
+                text: 'Evaluating Inter-Rater Reliability between two observers using the same observation checklist during classroom behavioral counts.', 
+                type: 'Inter-Rater Reliability Assessment', 
+                explanation: 'Ensures that two independent observers code behaviors consistently, eliminating observer subjective bias.', 
+                tags: ['Inter-Rater Reliability', 'Rigor'] 
+            },
+            { 
+                id: 13, level: 'advanced', 
+                text: 'Comparing Psychometric Properties: Construct Validity vs. Test-Retest Reliability in psychological questionnaires.', 
+                type: 'Psychometric Rigor Evaluation', 
+                explanation: 'Reliability measures consistency over time; construct validity proves the test actually measures the targeted psychological concept.', 
+                tags: ['Validity vs Reliability', 'Psychometrics'] 
+            },
+            { 
+                id: 14, level: 'advanced', 
+                text: 'Detecting Acquiescence Bias (yea-saying) and counteracting it by including reverse-scored survey items.', 
+                type: 'Acquiescence Bias & Reverse Coding', 
+                explanation: 'Mixing positively and negatively phrased items prevents respondents from blindly selecting "Strongly Agree" throughout.', 
+                tags: ['Acquiescence Bias', 'Reverse Scoring'] 
+            },
+            { 
+                id: 15, level: 'advanced', 
+                text: 'Structuring a Triangulated Multi-Instrument Protocol (Survey + In-depth Interview + Cognitive Test) for Project 2.', 
+                type: 'Triangulation Instrument Design', 
+                explanation: 'Combining quantitative and qualitative instruments strengthens overall internal and construct validity.', 
+                tags: ['Triangulation', 'Multi-Instrument'] 
+            }
+        ];
+
+        // DATA STRUCTURES: 15 Formative Practice Problems
+        const formativeProblems = [
+            // Level 1: Basic (5)
+            { 
+                id: 1, level: 'basic', 
+                prompt: 'Identify the question flaw: "Don\'t you think our school canteen serves unhealthy food?" How would you fix it?', 
+                solution: 'Flaw: Leading Question.\nFix: "How would you rate the nutritional quality of food served in the school canteen?" (Options: Excellent, Good, Average, Poor).' 
+            },
+            { 
+                id: 2, level: 'basic', 
+                prompt: 'What type of research instrument is best suited for measuring 500 students\' views on uniform policy within 1 day?', 
+                solution: 'Instrument: Closed-ended online questionnaire / rating scale.\nReason: Quick to administer, easy to aggregate statistically, and cost-effective.' 
+            },
+            { 
+                id: 3, level: 'basic', 
+                prompt: 'What is a Likert scale? Give a clear example of a 5-point agreement scale.', 
+                solution: 'Definition: A rating scale that measures degree of agreement or disagreement.\nExample: 1 = Strongly Disagree, 2 = Disagree, 3 = Neutral, 4 = Agree, 5 = Strongly Agree.' 
+            },
+            { 
+                id: 4, level: 'basic', 
+                prompt: 'Differentiate between an Open-Ended and Closed-Ended questionnaire item.', 
+                solution: 'Open-Ended: Allows participants to answer in their own words (qualitative depth).\nClosed-Ended: Provides fixed response options (quantitative speed).' 
+            },
+            { 
+                id: 5, level: 'basic', 
+                prompt: 'Why is an observation checklist better than a questionnaire for studying infant motor development?', 
+                solution: 'Reason: Infants cannot read or complete self-report questionnaires; researchers must directly observe and record motor milestones.' 
+            },
+
+            // Level 2: Intermediate (5)
+            { 
+                id: 6, level: 'intermediate', 
+                prompt: 'Identify and fix the double-barreled flaw: "How satisfied are you with your teacher\'s explanations and grading speed?"', 
+                solution: 'Flaw: Asks about two separate constructs (explanations and grading speed).\nFix: Split into two separate items: 1) "Satisfaction with explanations", 2) "Satisfaction with grading speed".' 
+            },
+            { 
+                id: 7, level: 'intermediate', 
+                prompt: 'What is Social Desirability Bias, and how can a researcher minimize it when designing a questionnaire on study habits?', 
+                solution: 'Definition: Tendency of respondents to answer in a way that makes them look good rather than truthfully.\nMinimization: Guarantee complete anonymity and frame questions neutrally without moral judgment.' 
+            },
+            { 
+                id: 8, level: 'intermediate', 
+                prompt: 'Match this research aim to the most appropriate instrument: "Exploring deep personal emotional coping strategies after losing a pet."', 
+                solution: 'Best Instrument: Semi-structured qualitative interview guide.\nReason: Provides empathy, flexibility, and depth needed for sensitive emotional exploration.' 
+            },
+            { 
+                id: 9, level: 'intermediate', 
+                prompt: 'Explain why psychological tests must be standardized before being used in formal research.', 
+                solution: 'Reason: Standardization creates uniform administration and scoring procedures, allowing individual scores to be meaningfully compared against normative population samples.' 
+            },
+            { 
+                id: 10, level: 'intermediate', 
+                prompt: 'Identify the flaw: "How often do you experience hyperfocus during academic tasks?" (Options: Never / Often)', 
+                solution: 'Flaws: 1) Uses psychological jargon ("hyperfocus" may be misunderstood), 2) Limited option range (lacks "Sometimes" or "Always").\nFix: Simplify language and expand options.' 
+            },
+
+            // Level 3: Advanced (5)
+            { 
+                id: 11, level: 'advanced', 
+                prompt: 'What is Pilot Testing, and why is it essential before collecting data for Project 2?', 
+                solution: 'Definition: Administering an instrument draft to a small test sample.\nImportance: Uncovers ambiguous wording, misread instructions, and formatting errors before actual data collection.' 
+            },
+            { 
+                id: 12, level: 'advanced', 
+                prompt: 'Explain how Reverse-Scored Items prevent Acquiescence Bias on Likert questionnaires.', 
+                solution: 'Explanation: Acquiescence bias is the tendency to agree with all statements. Including reverse-scored items (e.g., "I feel calm during tests" vs. "I feel nervous during tests") forces respondents to read attentively.' 
+            },
+            { 
+                id: 13, level: 'advanced', 
+                prompt: 'Differentiate between Inter-Rater Reliability and Test-Retest Reliability in research instruments.', 
+                solution: 'Inter-Rater Reliability: Consistency of scores assigned by different independent observers using the same instrument.\nTest-Retest Reliability: Consistency of results when the same test is given to the same participants at two different times.' 
+            },
+            { 
+                id: 14, level: 'advanced', 
+                prompt: 'Critique this instrument item: "Rate on a scale of 1-10 how much you love our revolutionary school counseling program."', 
+                solution: 'Critique: Severe leading wording ("revolutionary", "love") and unbalanced scale assumption.\nFix: "How satisfied are you with the school counseling program?" (1 = Very Dissatisfied to 5 = Very Satisfied).' 
+            },
+            { 
+                id: 15, level: 'advanced', 
+                prompt: 'Design a multi-instrument protocol for a study examining "Classroom Noise and Cognitive Fatigue in High Schoolers."', 
+                solution: 'Protocol: 1) Observation Checklist: Record noise decibel spikes during class. 2) Likert Questionnaire: Self-reported fatigue immediately post-class. 3) Standardized Cognitive Test: Digit span memory test pre/post lesson.' 
+            }
+        ];
+
+        // RENDER FUNCTIONS
+        function renderExamples(filter = 'all') {
+            const container = document.getElementById('examples-container');
+            container.innerHTML = '';
+            
+            const filtered = solvedExamples.filter(ex => filter === 'all' || ex.level === filter);
+
+            filtered.forEach(ex => {
+                const badgeColor = ex.level === 'basic' ? 'bg-blue-100 text-montano-blue border-blue-300' :
+                                   ex.level === 'intermediate' ? 'bg-teal-100 text-montano-teal border-teal-300' :
+                                   'bg-amber-100 text-amber-800 border-amber-300';
+                
+                const card = document.createElement('div');
+                card.className = "bg-white p-5 rounded-2xl border border-gray-200 shadow-sm hover:shadow-md transition flex flex-col justify-between";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] uppercase font-black px-2.5 py-0.5 rounded-full border ${badgeColor}">
+                                ${ex.level.toUpperCase()}
+                            </span>
+                            <button onclick="speakText('${escapeQuotes(ex.text)}')" class="text-montano-blue hover:text-montano-teal transition p-1" title="Listen to audio explanation">
+                                <i class="fa-solid fa-volume-high text-lg"></i>
+                            </button>
+                        </div>
+                        <p class="text-xs font-bold text-gray-800 mb-3 italic">"${ex.text}"</p>
+                        <div class="bg-montano-softWhite p-2.5 rounded-xl border border-gray-200 mb-2">
+                            <span class="text-[11px] font-black text-montano-blue block">Concept: ${ex.type}</span>
+                            <p class="text-[11px] text-gray-600 mt-1">${ex.explanation}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1 mt-2">
+                        ${ex.tags.map(tag => `<span class="text-[9px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded font-semibold">#${tag}</span>`).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderProblems(filter = 'all') {
+            const container = document.getElementById('problems-container');
+            container.innerHTML = '';
+
+            const filtered = formativeProblems.filter(p => filter === 'all' || p.level === filter);
+
+            filtered.forEach((p) => {
+                const badgeColor = p.level === 'basic' ? 'bg-blue-100 text-montano-blue border-blue-300' :
+                                   p.level === 'intermediate' ? 'bg-teal-100 text-montano-teal border-teal-300' :
+                                   'bg-amber-100 text-amber-800 border-amber-300';
+
+                const item = document.createElement('div');
+                item.className = "bg-white p-5 rounded-2xl border border-gray-200 shadow-sm";
+                item.innerHTML = `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-3">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-montano-blue text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">${p.id}</span>
+                            <span class="text-xs font-black uppercase tracking-wide px-2.5 py-0.5 rounded-full border ${badgeColor}">Level: ${p.level}</span>
+                        </div>
+                        <button onclick="toggleSolution('sol-${p.id}')" class="bg-montano-softWhite hover:bg-gray-200 text-montano-blue border border-montano-lightBlue text-xs font-bold px-3 py-1.5 rounded-xl transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-eye text-montano-yellow"></i> <span id="btn-txt-sol-${p.id}">Show Solution</span>
+                        </button>
+                    </div>
+                    <p class="text-sm font-bold text-gray-800 mb-2">${p.prompt}</p>
+                    <div id="sol-${p.id}" class="hidden mt-3 p-4 bg-montano-softWhite border-l-4 border-montano-teal rounded-r-xl">
+                        <span class="text-xs font-extrabold text-montano-teal uppercase tracking-wider block mb-1"><i class="fa-solid fa-check-circle"></i> Instrument Solution:</span>
+                        <p class="text-xs text-gray-700 font-medium leading-relaxed whitespace-pre-line">${p.solution}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // TAB SWITCHING LOGIC
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.remove('hidden');
+            document.getElementById(`btn-${tabId}`).classList.add('active');
+        }
+
+        function filterExamples(level) {
+            document.querySelectorAll('.ex-filter-btn').forEach(btn => {
+                btn.className = "ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700";
+            });
+            event.target.className = "ex-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white";
+            renderExamples(level);
+        }
+
+        function filterProblems(level) {
+            document.querySelectorAll('.prob-filter-btn').forEach(btn => {
+                btn.className = "prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-gray-200 text-gray-700";
+            });
+            event.target.className = "prob-filter-btn px-3 py-1 rounded-lg text-xs font-bold bg-montano-blue text-white";
+            renderProblems(level);
+        }
+
+        function toggleSolution(solId) {
+            const solDiv = document.getElementById(solId);
+            const btnTxt = document.getElementById(`btn-txt-${solId}`);
+            if (solDiv.classList.contains('hidden')) {
+                solDiv.classList.remove('hidden');
+                btnTxt.innerText = "Hide Solution";
+            } else {
+                solDiv.classList.add('hidden');
+                btnTxt.innerText = "Show Solution";
+            }
+        }
+
+        // FULLSCREEN TOGGLE API
+        function toggleFullscreen() {
+            const whiteboard = document.getElementById('whiteboard');
+            if (!document.fullscreenElement) {
+                if (whiteboard.requestFullscreen) {
+                    whiteboard.requestFullscreen();
+                } else if (whiteboard.webkitRequestFullscreen) {
+                    whiteboard.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+
+        // TEXT-TO-SPEECH (TTS) SYNTHESIS
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.95;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Text-to-Speech audio is not supported in this browser.");
+            }
+        }
+
+        function escapeQuotes(str) {
+            return str.replace(/'/g, "\\'").replace(/"/g, '\\"');
+        }
+
+        // SPEECH RECOGNITION LOGIC
+        let recognition = null;
+        let isListening = false;
+
+        if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function() {
+                isListening = true;
+                document.getElementById('mic-btn-text').innerText = "Listening... Speak Defense Now";
+                document.getElementById('mic-btn').classList.add('pulse-ring', 'bg-red-600');
+                document.getElementById('speech-status').innerHTML = '<span class="text-red-600 flex items-center gap-1"><i class="fa-solid fa-microphone animate-bounce"></i> Listening in English... Specify instrument type, Likert scale & bias control...</span>';
+            };
+
+            recognition.onresult = function(event) {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    transcript += event.results[i][0].transcript;
+                }
+                document.getElementById('user-input-text').value = transcript;
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Speech Recognition Error:", event.error);
+                stopListeningState("Error captured. Use text box or re-try mic.");
+            };
+
+            recognition.onend = function() {
+                stopListeningState("Speech input captured. Click 'Analyze Instrument Defense' for live evaluation.");
+            };
+        } else {
+            document.getElementById('speech-status').innerText = "Web Speech API not supported on this browser. You can type your response below.";
+        }
+
+        function toggleSpeechRecognition() {
+            if (!recognition) {
+                alert("Web Speech Recognition API is not supported in your browser. Please type your answer.");
+                return;
+            }
+
+            if (isListening) {
+                recognition.stop();
+            } else {
+                try {
+                    recognition.start();
+                } catch(e) {
+                    console.error(e);
+                }
+            }
+        }
+
+        function stopListeningState(msg) {
+            isListening = false;
+            document.getElementById('mic-btn-text').innerText = "Start Speaking Defense";
+            document.getElementById('mic-btn').classList.remove('pulse-ring', 'bg-red-600');
+            document.getElementById('speech-status').innerHTML = `<i class="fa-solid fa-circle-info"></i> ${msg}`;
+        }
+
+        // REAL-TIME EVALUATION ENGINE FOR PERFORMANCE DASHBOARD
+        function evaluateUserResponse() {
+            const text = document.getElementById('user-input-text').value.trim();
+            if (!text) {
+                alert("Please speak or write your instrument defense before evaluating.");
+                return;
+            }
+
+            const lower = text.toLowerCase();
+
+            // Key Research Terms for Guide 5
+            const terms = [
+                { term: 'likert', tag: 'Likert Scale' },
+                { term: 'questionnaire', tag: 'Questionnaire' },
+                { term: 'checklist', tag: 'Observation Checklist' },
+                { term: 'interview', tag: 'Interview Guide' },
+                { term: 'psychological test', tag: 'Psychological Test' },
+                { term: 'leading', tag: 'Leading Question Bias' },
+                { term: 'double-barreled', tag: 'Double-Barreled Control' },
+                { term: 'neutral', tag: 'Neutral Wording' },
+                { term: 'pilot', tag: 'Pilot Testing' }
+            ];
+
+            let clarityScore = 75;
+            let accuracyScore = 30;
+            let etiquetteScore = 80;
+            const detected = [];
+
+            // Politeness & academic style check
+            if (lower.includes('please') || lower.includes('thank you') || lower.includes('dr.') || lower.includes('because') || lower.includes('in order to')) {
+                etiquetteScore = 95;
+            }
+
+            // Word length bonus for clarity
+            if (text.length > 50) clarityScore = 90;
+
+            terms.forEach(item => {
+                if (lower.includes(item.term)) {
+                    accuracyScore += 20;
+                    if (!detected.includes(item.tag)) detected.push(item.tag);
+                }
+            });
+
+            clarityScore = Math.min(100, clarityScore);
+            accuracyScore = Math.min(100, accuracyScore);
+            etiquetteScore = Math.min(100, etiquetteScore);
+
+            // Update Dashboard UI Scores
+            updateDashboardMeters(clarityScore, accuracyScore, etiquetteScore);
+
+            // Update Detected Key Terms Container
+            const termsContainer = document.getElementById('detected-terms-container');
+            if (detected.length > 0) {
+                termsContainer.innerHTML = detected.map(t => `<span class="bg-montano-blue text-white text-xs font-bold px-2 py-1 rounded-lg">✓ ${t}</span>`).join('');
+            } else {
+                termsContainer.innerHTML = `<span class="text-xs text-amber-700 italic">No specific instrument keywords detected. Mention 'Likert Scale', 'Questionnaire', or 'Double-barreled'.</span>`;
+            }
+
+            // Generate AI Pedagogical Feedback
+            let feedback = "";
+            const avg = (clarityScore + accuracyScore + etiquetteScore) / 3;
+            if (avg >= 80) {
+                feedback = `Outstanding instrument defense! You selected an appropriate tool, operationalized key constructs, and demonstrated clear control over question bias pitfalls like leading or double-barreled items.`;
+            } else if (avg >= 55) {
+                feedback = `Good reasoning! You identified a research instrument, but make sure to explicitly explain how you avoided leading language or double-barreled questions in your items.`;
+            } else {
+                feedback = `Initial defense recorded. Focus on defining your research instrument (e.g., Likert scale or checklist) and providing neutral sample items.`;
+            }
+
+            document.getElementById('ai-feedback-text').innerText = feedback;
+
+            // Trigger mentor voice response using Speech Synthesis
+            speakText(`Analysis complete. ${feedback}`);
+        }
+
+        function updateDashboardMeters(clarity, accuracy, etiquette) {
+            document.getElementById('score-clarity-val').innerText = `${clarity}%`;
+            document.getElementById('score-clarity-bar').style.width = `${clarity}%`;
+
+            document.getElementById('score-accuracy-val').innerText = `${accuracy}%`;
+            document.getElementById('score-accuracy-bar').style.width = `${accuracy}%`;
+
+            document.getElementById('score-etiquette-val').innerText = `${etiquette}%`;
+            document.getElementById('score-etiquette-bar').style.width = `${etiquette}%`;
+        }
+
+        function saveProjectCheckpoint() {
+            const q = document.getElementById('proj-q').value.trim();
+            const type = document.getElementById('proj-type').value;
+            const item1 = document.getElementById('proj-item1').value.trim();
+            const item2 = document.getElementById('proj-item2').value.trim();
+
+            if (!q || !type || !item1 || !item2) {
+                alert("Please complete all four fields for your Project 2 Instrument Draft before submitting.");
+            } else {
+                alert("Project 2 Instrument Draft submitted successfully! Your instructor and peers will review your research tool.");
+            }
+        }
+
+        // INITIALIZATION ON PAGE LOAD
+        window.onload = function() {
+            renderExamples('all');
+            renderProblems('all');
+        };
+    </script>
+</body>
+</html>
